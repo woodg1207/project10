@@ -1,0 +1,30 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+<h1>영화 : {{movie.title}}</h1>
+
+<p>관객수 : {{movie.audience}}</p>
+<p><img src="{{movie.poster_url}}" alt="{{movies.title}}사진" width="200px"></p>
+<p>줄거리 : {{movie.description}}</p>
+
+
+<hr>
+
+{% for review in reviews %}
+<p>{{review.content}} || {{review.score}}</p>
+{% if user == review.user %}
+<form action="{% url 'movies:review_delete' movie.pk review.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="삭제">
+</form>
+{% endif %}
+{% endfor %}
+{% if user.is_authenticated %}
+<form action="{% url 'movies:review_create' movie.pk %}" method="POST">
+  {% csrf_token %}
+  {{reviewform.as_p}}
+  <input type="submit" value="댓">
+</form>
+{% endif %}
+
+{% endblock content %}
