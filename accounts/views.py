@@ -48,9 +48,3 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('movies:index')
-<<<<<<< HEAD
-    
-=======
-    
-            
->>>>>>> bc152f6731bdbdadd2449cfa5899149eb69bbf78
