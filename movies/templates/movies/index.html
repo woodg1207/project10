@@ -3,8 +3,9 @@
   <h1>영화 목록</h1>
   {% for movie in movies %}
   <hr>
-    {{movie.title}}  <br>
+    <a href="{% url 'movies:detail' movie.pk %}">
     <img src="{{movie.poster_url}}" alt="{{movie.title}}이미지" width="200px" height="300px">
+    </a>
   {% endfor %}
 
 {% endblock content %}
