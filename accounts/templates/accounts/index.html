@@ -1,0 +1,7 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+  {% for user in users %}
+    <a href="#">{{ user.username }}</a>
+  {% endfor %}
+{% endblock content %}

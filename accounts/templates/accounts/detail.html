@@ -1,0 +1,15 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+  {% for review in person.reviews_set.all %}
+    <p>{{ review.score }} - {{ review.content }}</p>
+  {% endfor %}
+  <hr>
+  <h3>좋아하는 영화</h3>
+  {% for like_movie in person.like_movies.all %}
+    <p>{{ like_movie.title }}</p>
+    <img src="{{ like_movie.poster_url }}" alt="movie_poster">
+  {% endfor %}
+  <hr>
+  <h3>팔로우 : {{ person.followers.length }}, 팔로잉 : {{ person.followings_set.length }}</h3>
+{% endblock content %}
