@@ -6,6 +6,15 @@
     <a href="{% url 'movies:detail' movie.pk %}">
     <img src="{{movie.poster_url}}" alt="{{movie.title}}이미지" width="200px" height="300px">
     </a>
+    <a href="{% url 'movies:like' movie.pk %}">
+      {% if user in movie.like_users.all %}
+        좋아요 취소
+      {% else %}
+        좋아요
+      {% endif %}
+    </a>
+    <br>
+    {{ movie.like_users.all| length }} 명이 글을 좋아 합니다.
   {% endfor %}
 
 {% endblock content %}
