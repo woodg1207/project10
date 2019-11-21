@@ -12,6 +12,14 @@
 </head>
 
 <body>
+  <a href="{% url 'accounts:signup' %}">signup</a>
+  <a href="{% url 'accounts:login' %}">login</a>
+  <a href="{% url 'accounts:logout' %}">logout</a>
+  <a href="{% url 'accounts:index' %}">유저 목록</a>
+  <br>
+  <a href="{% url 'movies:index' %}">홈으로</a>
+  <hr>
+
   <div class="container">
     {% block content %}
     {% endblock content %}
