@@ -1,21 +1,27 @@
 {% extends 'movies/base.html' %}
 {% block content %}
-  <h1>영화 목록</h1>
-  {% for movie in movies %}
-  <hr>
-    <a href="{% url 'movies:detail' movie.pk %}">
-    <img src="{{movie.poster_url}}" alt="{{movie.title}}이미지" width="200px" height="300px">
-    </a>
-    <br>
+<h1>영화 목록</h1>
+<div class="row">
+{% for movie in movies %}
+<div class="card" style="width: 18rem;">
+  <a href="{% url 'movies:detail' movie.pk %}">
+    <img src="{{movie.poster_url}}" alt="{{movie.title}}이미지" class="card-img-top">
+  </a>
+  <div class="card-body">
+    <p class="card-text"> {{movie.title}}
+    </p>
     <a href="{% url 'movies:like' movie.pk %}">
       {% if user in movie.like_users.all %}
-        좋아요 취소
+      좋아요 취소
       {% else %}
-        좋아요
+      좋아요
       {% endif %}
     </a>
     <br>
     {{ movie.like_users.all| length }} 명이 글을 좋아 합니다.
-  {% endfor %}
+  </div>
+</div>
+{% endfor %}
+</div>
 
 {% endblock content %}

@@ -47,7 +47,7 @@ def like(request, movie_pk):
         movie.like_users.add(request.user)
     return redirect('movies:index')
 
-
+@login_required
 def follow(request, movie_pk, user_pk):
     person = get_object_or_404(get_user_model(), pk=user_pk)
     user = request.user
