@@ -8,17 +8,36 @@
 <p>줄거리 : {{movie.description}}</p>
 
 
-<hr>
+
 
 {% for review in reviews %}
-<p>{{review.content}} || {{review.score}}</p>
+<hr>
+<p>작성자:{{ review.user }} </p>
+<p>
+review : {{review.content}} 
+</p>
+<p>
+point : {{review.score}}
+</p>
 {% if user == review.user %}
 <form action="{% url 'movies:review_delete' movie.pk review.pk %}" method="POST">
   {% csrf_token %}
   <input type="submit" value="삭제">
 </form>
+{% else %}
+  {% if user in follower %}
+    <form action="{% url 'movies:follow' movie.pk person.pk%}">
+      <input type="submit" value="UnFollow">
+    </form>
+  {% else %}
+    <form action="{% url 'movies:follow' movie.pk person.pk %}">
+      <input type="submit" value="Following">
+    </form>
+  {% endif %}
+    {% csrf_token %}
 {% endif %}
 {% endfor %}
+<hr>
 {% if user.is_authenticated %}
 <form action="{% url 'movies:review_create' movie.pk %}" method="POST">
   {% csrf_token %}
