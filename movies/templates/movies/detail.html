@@ -25,12 +25,12 @@ point : {{review.score}}
   <input type="submit" value="삭제">
 </form>
 {% else %}
-  {% if user in follower %}
-    <form action="{% url 'movies:follow' movie.pk person.pk%}">
+  {% if user in review.user.followers.all %}
+    <form action="{% url 'movies:follow' movie.pk review.user_id %}">
       <input type="submit" value="UnFollow">
     </form>
   {% else %}
-    <form action="{% url 'movies:follow' movie.pk person.pk %}">
+    <form action="{% url 'movies:follow' movie.pk review.user_id %}">
       <input type="submit" value="Following">
     </form>
   {% endif %}

@@ -3,6 +3,7 @@ from .models import Movie, Genre, Review
 from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 def index(request):
@@ -45,3 +46,14 @@ def like(request, movie_pk):
     else:
         movie.like_users.add(request.user)
     return redirect('movies:index')
+
+
+def follow(request, movie_pk, user_pk):
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    user = request.user
+    if person != user:
+        if person.followers.filter(pk=user.pk).exists():
+            person.followers.remove(user)
+        else:
+            person.followers.add(user)
+    return redirect('movies:detail', movie_pk)

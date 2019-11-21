@@ -2,6 +2,6 @@
 
 {% block content %}
   {% for user in users %}
-    <a href="#">{{ user.username }}</a>
+    <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
   {% endfor %}
 {% endblock content %}
